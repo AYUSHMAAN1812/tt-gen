@@ -36,6 +36,8 @@ function App() {
       ...state[selectedSegment][slotIndex],
     };
 
+    console.log(data);
+
     try {
       await axios.post('http://localhost:5000/api/schedules', data);
       alert('Data saved successfully!');
