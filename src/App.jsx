@@ -36,16 +36,26 @@ function App() {
       ...state[selectedSegment][slotIndex],
     };
 
-    console.log(data);
-
     try {
-      await axios.post('http://localhost:5000/api/schedules', data);
+      const response = await fetch('http://localhost:5000/api/schedules', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save');
+      }
+
       alert('Data saved successfully!');
     } catch (error) {
       console.error('Error saving data:', error);
       alert('Failed to save data.');
     }
   };
+
 
   return (
     <div>
